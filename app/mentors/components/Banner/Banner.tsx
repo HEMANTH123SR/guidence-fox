@@ -12,7 +12,7 @@ const Banner = () => {
               Connect with Expert Mentors <br /> Across Various Domains
             </h1>
             <p className="mt-6 text-lg leading-8 text-black">
-              Find the right mentor to guide you in your career, whether it's in technology, finance, healthcare, or creative arts.
+              Find the right mentor to guide you in your career, whether it&apos;s in technology, finance, healthcare, or creative arts.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="hidden sm:block -space-x-2 overflow-hidden">
