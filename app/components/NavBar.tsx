@@ -1,16 +1,67 @@
-import { get } from "https";
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
+import { GiFoxTail } from "react-icons/gi";
+
 export const NavBar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolledToHeight, setIsScrolledToHeight] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      if (scrollTop > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
+      if (scrollTop >= windowHeight) {
+        setIsScrolledToHeight(true);
+      } else {
+        setIsScrolledToHeight(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="w-screen flex justify-between">
-      {/* logo */}
-      <div className="flex flex-row  space-x-3 justify-center items-center">
-        {/* <img src={getRandomFoxyExpression()} alt="foxy" className="h-14 w-14 max-h-14 max-w-14"/> */}
-        
-        <h1 className="text-2xl font-bold text-orange-600">Dio</h1>
-      </div>
-      {/* lanquage */}
-    </header>
+    <div
+      className={`sticky top-0 z-50   bg-white w-screen flex justify-center items-center ${
+        isScrolled && "border-b"
+      }`}
+    >
+      <header className={`  w-9/12 py-4 flex justify-between `}>
+        {/* logo */}
+        <div className="flex flex-row  justify-center items-center">
+          <img src={"/logo.png"} alt="foxy" className="h-10 w-auto" />
+          <h1 className="font-extrabold   text-2xl  border-[#59CC03] text-[#59CC03] uppercase">
+            FOX
+          </h1>
+          {/* <GiFoxTail className="h-10 w-10 text-[#59CC03] mt-4" /> */}
+        </div>
+        {/* lanquage */}
+        <div className="flex justify-center items-center">
+          {isScrolledToHeight ? (
+            <button className="bg-[#59CC03] uppercase rounded-xl px-4 py-2 font-bold text-white">
+              get started
+            </button>
+          ) : (
+            <div className="flex justify-center items-center space-x-1 text-[#AFAEAE]">
+              <span className=" font-semibold capitalize ">{`SITE LANGUAGE : ENGLISH `}</span>
+              <ChevronDown className="text-sm" />
+            </div>
+          )}
+        </div>
+      </header>
+    </div>
   );
 };
 
