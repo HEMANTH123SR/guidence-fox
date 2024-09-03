@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SearchIcon, ChevronDownIcon, XIcon } from "lucide-react";
 
 type FilterCategory =
@@ -25,17 +25,106 @@ type SelectedFilters = {
   [key in FilterCategory]?: string[];
 };
 
+type Institution = {
+  _id: string;
+  name: string;
+  location: string;
+  ranking: number;
+  reviews: {
+    rating: number;
+    review_count: number;
+  };
+  courses: {
+    name: string;
+    fees: number;
+  }[];
+};
+
 const CollegeRankings: React.FC = () => {
-  
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({});
   const [openCategory, setOpenCategory] = useState<FilterCategory | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [institutions, setInstitutions] = useState<Institution[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+
+  useEffect(() => {
+    fetchInstitutions();
+  }, [selectedFilters, searchQuery, page]);
+
+  const fetchInstitutions = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const queryParams = new URLSearchParams({
+        page: page.toString(),
+        limit: "10",
+        ...buildQueryParams(),
+      });
+      const response = await fetch(`/api/institutions?${queryParams}`);
+      const data = await response.json();
+      if (data.success) {
+        setInstitutions(data.data);
+        setTotalPages(data.pagination.pages);
+      } else {
+        setError("Failed to fetch institutions");
+      }
+    } catch (error) {
+      setError("An error occurred while fetching institutions");
+    }
+    setLoading(false);
+  };
+
+  const buildQueryParams = () => {
+    const params: { [key: string]: string } = {};
+    if (searchQuery) params.name = searchQuery;
+    if (selectedFilters.Location)
+      params.location = selectedFilters.Location.join(",");
+    if (selectedFilters.Ownership)
+      params.type = selectedFilters.Ownership.join(",");
+    if (selectedFilters.Specialization)
+      params.specialization = selectedFilters.Specialization.join(",");
+    if (selectedFilters.Rating) {
+      const minRating = Math.min(
+        ...selectedFilters.Rating.map((r) => parseInt(r))
+      );
+      params.minRating = minRating.toString();
+    }
+    if (selectedFilters["Total Fees"]) {
+      const [minFees, maxFees] = getFeesRange(selectedFilters["Total Fees"]);
+      if (minFees) params.minFees = minFees.toString();
+      if (maxFees) params.maxFees = maxFees.toString();
+    }
+    return params;
+  };
+
+  const getFeesRange = (fees: string[]): [number | null, number | null] => {
+    let minFees: number | null = null;
+    let maxFees: number | null = null;
+    fees.forEach((fee) => {
+      if (fee === "< ₹5 Lakh") {
+        maxFees = maxFees ? Math.min(maxFees, 500000) : 500000;
+      } else if (fee === "₹5-10 Lakh") {
+        minFees = minFees ? Math.min(minFees, 500000) : 500000;
+        maxFees = maxFees ? Math.max(maxFees, 1000000) : 1000000;
+      } else if (fee === "₹10-15 Lakh") {
+        minFees = minFees ? Math.min(minFees, 1000000) : 1000000;
+        maxFees = maxFees ? Math.max(maxFees, 1500000) : 1500000;
+      } else if (fee === "> ₹15 Lakh") {
+        minFees = minFees ? Math.max(minFees, 1500000) : 1500000;
+      }
+    });
+    return [minFees, maxFees];
+  };
 
   const addFilter = (category: FilterCategory, filter: string) => {
     setSelectedFilters((prev) => ({
       ...prev,
       [category]: [...(prev[category] || []), filter],
     }));
+    setPage(1);
   };
 
   const removeFilter = (category: FilterCategory, filter: string) => {
@@ -43,10 +132,12 @@ const CollegeRankings: React.FC = () => {
       ...prev,
       [category]: prev[category]?.filter((f) => f !== filter) || [],
     }));
+    setPage(1);
   };
 
   const clearAllFilters = () => {
     setSelectedFilters({});
+    setPage(1);
   };
 
   const toggleCategory = (category: FilterCategory) => {
@@ -176,72 +267,86 @@ const CollegeRankings: React.FC = () => {
               </div>
             </div>
 
-            {/* College Cards */}
-            {[1, 2, 3].map((index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-md p-6 mb-6"
-              >
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-24 h-24 bg-gray-200 rounded-lg"></div>
-                  <div className="flex-grow">
-                    <div className="flex justify-between items-start mb-2">
-                      <h2 className="text-xl font-semibold text-blue-600">
-                        {index}. Sample University Name
-                      </h2>
-                      <div className="flex gap-2">
-                        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                          Compare
-                        </button>
-                        <button className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors">
-                          Brochure
-                        </button>
+            {/* college cards */}
+            {loading ? (
+              <div>Loading...</div>
+            ) : error ? (
+              <div>{error}</div>
+            ) : (
+              institutions.map((institution, index) => (
+                <div
+                  key={institution._id}
+                  className="bg-white rounded-lg shadow-md p-6 mb-6"
+                >
+                  <div className="flex items-start gap-6">
+                    <div className="flex-shrink-0 w-24 h-24 bg-gray-200 rounded-lg"></div>
+                    <div className="flex-grow">
+                      <div className="flex justify-between items-start mb-2">
+                        <h2 className="text-xl font-semibold text-blue-600">
+                          {index + 1}. {institution.name}
+                        </h2>
+                        <div className="flex gap-2">
+                          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                            Compare
+                          </button>
+                          <button className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors">
+                            Brochure
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-4 mb-2">
-                      <div className="flex items-center">
-                        <span className="text-2xl font-bold text-gray-800">
-                          4.2
+                      <div className="flex items-center gap-4 mb-2">
+                        <div className="flex items-center">
+                          <span className="text-2xl font-bold text-gray-800">
+                            {institution.reviews.rating.toFixed(1)}
+                          </span>
+                          <div className="ml-1 text-yellow-400">
+                            {"★".repeat(Math.round(institution.reviews.rating))}
+                            {"☆".repeat(
+                              5 - Math.round(institution.reviews.rating)
+                            )}
+                          </div>
+                        </div>
+                        <span className="text-sm text-gray-500">
+                          ({institution.reviews.review_count} reviews)
                         </span>
-                        <div className="ml-1 text-yellow-400">★★★★☆</div>
                       </div>
-                      <span className="text-sm text-gray-500">
-                        (1000+ reviews)
-                      </span>
-                    </div>
-                    <div className="flex gap-4 text-sm text-gray-600">
-                      <span>Fees: ₹5.00 Lakh</span>
-                      <span>Salary: ₹6.00 Lakh</span>
-                    </div>
-                    <div className="mt-4">
-                      <span className="text-sm font-medium text-gray-600 mr-4">
-                        Outlook 23
-                      </span>
-                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-800 font-semibold">
-                        {index}
-                      </span>
+                      <div className="flex gap-4 text-sm text-gray-600">
+                        <span>
+                          Fees: ₹
+                          {(institution.courses[0]?.fees / 100000).toFixed(2)}{" "}
+                          Lakh
+                        </span>
+                      </div>
+                      <div className="mt-4">
+                        <span className="text-sm font-medium text-gray-600 mr-4">
+                          Ranking
+                        </span>
+                        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-800 font-semibold">
+                          {institution.ranking}
+                        </span>
+                      </div>
                     </div>
                   </div>
+                  <div className="mt-4 flex gap-4 text-sm">
+                    {[
+                      "Admissions",
+                      "Courses",
+                      "Fees",
+                      "Placements",
+                      "Cutoff",
+                    ].map((item) => (
+                      <a
+                        key={item}
+                        href="#"
+                        className="text-blue-600 hover:underline"
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <div className="mt-4 flex gap-4 text-sm">
-                  {[
-                    "Admissions",
-                    "Courses",
-                    "Fees",
-                    "Placements",
-                    "Cutoff",
-                  ].map((item) => (
-                    <a
-                      key={item}
-                      href="#"
-                      className="text-blue-600 hover:underline"
-                    >
-                      {item}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
