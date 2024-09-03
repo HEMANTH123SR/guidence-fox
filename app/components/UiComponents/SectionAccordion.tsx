@@ -10,8 +10,8 @@ import { LiaUniversitySolid } from "react-icons/lia";
 
 export const SectionAccordion = () => {
   return (
-    <div className="w-9/12 space-x-4  mx-auto space-y-4">
-      <div className="grid grid-cols-2 gap-8">
+    <div className="w-11/12 space-x-4  mx-auto space-y-4">
+      <div className="grid grid-cols-3 gap-8">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="school">
             <AccordionTrigger>
@@ -24,7 +24,33 @@ export const SectionAccordion = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent>Math (NCERT) content goes here.</AccordionContent>
+            <AccordionContent>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
+              debitis itaque reiciendis nisi molestias tempore, accusantium quam
+              ratione nostrum modi asperiores doloremque ea velit temporibus
+              dolor ad amet! Corrupti, quia?
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="high-school">
+            <AccordionTrigger>
+              <div className="flex items-center">
+                <div className="w-16 h-16 bg-[#45D62F] border text-white rounded-full flex items-center justify-center mr-2">
+                  <LiaUniversitySolid className="text-4xl" />
+                </div>
+                <span className="text-2xl text-[#4A4B4A] font-semibold">
+                  High School
+                </span>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Voluptatem ea quae adipisci dolores, cupiditate aliquid obcaecati
+              sapiente culpa fugiat iusto minus eius maiores, voluptate porro
+              officia eum, quod vitae inventore!
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
 
@@ -33,8 +59,6 @@ export const SectionAccordion = () => {
             <AccordionTrigger>
               <div className="flex items-center">
                 <div className="w-16 h-16 bg-[#45D62F] border text-white rounded-full flex items-center justify-center mr-2">
-                  {/* <FaUniversity className="text-4xl"/> */}
-                  {/* <BiSolidSchool className="text-4xl" /> */}
                   <LiaUniversitySolid className="text-4xl" />
                 </div>
                 <span className="text-2xl text-[#4A4B4A] font-semibold">
@@ -43,7 +67,10 @@ export const SectionAccordion = () => {
               </div>
             </AccordionTrigger>
             <AccordionContent>
-              Science (NCERT) content goes here.
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Voluptatem ea quae adipisci dolores, cupiditate aliquid obcaecati
+              sapiente culpa fugiat iusto minus eius maiores, voluptate porro
+              officia eum, quod vitae inventore!
             </AccordionContent>
           </AccordionItem>
         </Accordion>

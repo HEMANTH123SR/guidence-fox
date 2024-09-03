@@ -49,6 +49,8 @@ export default function Home() {
       <div className="w-10/12 flex justify-center items-center">
         <SectionAccordion />
       </div>
+
+      
     </main>
   );
 }
