@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <main>
       <Banner />
-      <Tabs />
       <Mentor />
+      <Tabs />
     </main>
   )
 }

@@ -68,7 +68,7 @@ const Banner = () => {
                 <Dropdowntwo />
               </div>
               <div className="col-span-3 sm:col-span-2 mt-2">
-                <button className="bg-purple w-full hover:bg-purple text-white font-bold py-4 px-3 rounded">
+                <button className="bg-[#59CC03] w-full hover:bg-purple text-white font-bold py-4 px-3 rounded">
                   Get Started
                 </button>
               </div>
