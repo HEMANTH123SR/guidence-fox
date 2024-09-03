@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <main className="flex  flex-col justify-center items-center">
       <div className=" mt-16 space-x-12 w-10/12 flex justify-center items-center">
-        <img className="w-[32vw] h-auto" src="/ill/relationship.png" />
+        <img className="w-[32vw] h-auto" src="/ill/Design.png" />
         <div className="flex flex-col z-30">
           {/* hero text */}
           <div className="flex justify-center  flex-col text-4xl font-extrabold text-[#4A4B4A] tracking-wide ">
@@ -17,10 +17,8 @@ export default function Home() {
               illuminate pathways to success and ignite passions for lifelong
               learning.
             </p>
-           
-              Together, we shape futures and inspire careers that resonate with
-              purpose and potential.
-           
+            Together, we shape futures and inspire careers that resonate with
+            purpose and potential.
           </div>
 
           {/* call to action btn */}
