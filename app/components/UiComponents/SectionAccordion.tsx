@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { BiSolidSchool } from "react-icons/bi";
 import { LiaUniversitySolid } from "react-icons/lia";
+import Link from "next/link";
 
 export const SectionAccordion = () => {
   return (
@@ -24,11 +25,27 @@ export const SectionAccordion = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-              debitis itaque reiciendis nisi molestias tempore, accusantium quam
-              ratione nostrum modi asperiores doloremque ea velit temporibus
-              dolor ad amet! Corrupti, quia?
+            <AccordionContent className="bg-slate-50  border-b-2 ">
+              <div className="flex flex-col justify-center items-center space-y-4 py-6 font-semibold">
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] uppercase tracking-wide"
+                >
+                  job simulation
+                </Link>
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] uppercase tracking-wide"
+                >
+                  find your intrest
+                </Link>
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] uppercase tracking-wide"
+                >
+                  Guide
+                </Link>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -45,11 +62,27 @@ export const SectionAccordion = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatem ea quae adipisci dolores, cupiditate aliquid obcaecati
-              sapiente culpa fugiat iusto minus eius maiores, voluptate porro
-              officia eum, quod vitae inventore!
+            <AccordionContent className="bg-slate-50 border-b-2">
+              <div className="flex flex-col justify-center items-center space-y-4 py-6 font-semibold">
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] hover:underline uppercase tracking-wide"
+                >
+                  carrer roadmap
+                </Link>
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] hover:underline uppercase tracking-wide"
+                >
+                  expolore mentorship
+                </Link>
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] hover:underline uppercase tracking-wide"
+                >
+                  find your intrest
+                </Link>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -66,11 +99,27 @@ export const SectionAccordion = () => {
                 </span>
               </div>
             </AccordionTrigger>
-            <AccordionContent>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatem ea quae adipisci dolores, cupiditate aliquid obcaecati
-              sapiente culpa fugiat iusto minus eius maiores, voluptate porro
-              officia eum, quod vitae inventore!
+            <AccordionContent className="bg-slate-50 border-b-2">
+              <div className="flex flex-col justify-center items-center space-y-4 py-6 font-semibold">
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] hover:underline uppercase tracking-wide"
+                >
+                  find college/uni
+                </Link>
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] hover:underline uppercase tracking-wide"
+                >
+                  expolore mentorship
+                </Link>
+                <Link
+                  href={"/"}
+                  className="text-[#564B4A] hover:underline uppercase tracking-wide"
+                >
+                  find your intrest
+                </Link>
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
