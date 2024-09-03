@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { dio_font_normale } from "@/lib/fonts/font";
 import { NavBar } from "@/app/components/NavBar";
 import "./globals.css";
+import Zlayout from "./components/Zlayout";
 
 
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={`${dio_font_normale.className} w-screen bg-[#FEFEFF] overflow-x-hidden`}>
         <NavBar />
         {children}
+        <Zlayout />
       </body>
     </html>
   );
