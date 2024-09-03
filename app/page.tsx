@@ -1,3 +1,4 @@
+import { Features } from "@/app/components/Features/index";
 import { SectionAccordion } from "@/app/components/UiComponents/SectionAccordion";
 import Zlayout from "./components/Zlayout";
 export default function Home() {
