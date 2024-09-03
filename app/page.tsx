@@ -1,7 +1,8 @@
+import { SectionAccordion } from "@/app/components/UiComponents/SectionAccordion";
 export default function Home() {
   return (
     <main className="flex  flex-col justify-center items-center">
-      <div className=" mt-16 space-x-12 w-10/12 flex justify-center items-center">
+      <div className="mb-24 mt-16 space-x-12 w-10/12 flex justify-center items-center">
         <img className="w-[32vw] h-auto" src="/ill/Design.png" />
         <div className="flex flex-col z-30">
           {/* hero text */}
@@ -44,6 +45,9 @@ export default function Home() {
           </div>
           <div></div>
         </div>
+      </div>
+      <div className="w-10/12 flex justify-center items-center">
+        <SectionAccordion />
       </div>
     </main>
   );
