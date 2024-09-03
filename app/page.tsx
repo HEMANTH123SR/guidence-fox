@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Zlayout from "./components/Zlayout";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
         className="h-[95vh] w-screen"
         style={{ backgroundImage: "url('/background.svg')" }}
       ></div> */}
+      <Zlayout />
     </main>
   );
 }
