@@ -15,3 +15,9 @@ export const dio_extra_bold = locaFont({
   src: "../fonts/dio-font-extra-bold.woff2",
   display: "swap",
 });
+
+
+export const euclid=locaFont({
+  src: "../fonts/Euclid Circular A Regular.ttf",
+  display: "swap",
+});

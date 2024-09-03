@@ -7,6 +7,9 @@ import {
 } from "@/components/ui/accordion";
 import { BiSolidSchool } from "react-icons/bi";
 import { LiaUniversitySolid } from "react-icons/lia";
+import { FaSchool } from "react-icons/fa";
+import { PiBuildingApartmentFill } from "react-icons/pi";
+
 import Link from "next/link";
 
 export const SectionAccordion = () => {
@@ -55,7 +58,7 @@ export const SectionAccordion = () => {
             <AccordionTrigger>
               <div className="flex items-center">
                 <div className="w-16 h-16 bg-[#45D62F] border text-white rounded-full flex items-center justify-center mr-2">
-                  <LiaUniversitySolid className="text-4xl" />
+                  <FaSchool className="text-4xl" />
                 </div>
                 <span className="text-2xl text-[#4A4B4A] font-semibold">
                   High School
@@ -92,7 +95,7 @@ export const SectionAccordion = () => {
             <AccordionTrigger>
               <div className="flex items-center">
                 <div className="w-16 h-16 bg-[#45D62F] border text-white rounded-full flex items-center justify-center mr-2">
-                  <LiaUniversitySolid className="text-4xl" />
+                  <PiBuildingApartmentFill className="text-4xl" />
                 </div>
                 <span className="text-2xl text-[#4A4B4A] font-semibold">
                   College/Uni
