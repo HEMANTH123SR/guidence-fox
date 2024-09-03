@@ -1,9 +1,12 @@
 export default function Home() {
   return (
     <main className="flex  flex-col ">
-      <div className="h-[80vh] space-x-12 w-screen flex justify-center items-center">
+      <div
+        className="h-[80vh] space-x-12 w-screen flex justify-center items-center"
+        // style={{ backgroundImage: "url('/background.svg')" }}
+      >
         <img className="w-[35vw] h-auto" src="/ill/relationship.png" />
-        <div className="flex flex-col">
+        <div className="flex flex-col z-30">
           {/* hero text */}
           <div className="flex justify-center items-center flex-col text-4xl font-extrabold text-[#4A4B4A] tracking-wide">
             <h2>Pick your model below which suits</h2>
