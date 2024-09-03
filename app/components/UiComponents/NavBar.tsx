@@ -58,7 +58,7 @@ export const NavBar = () => {
         </Link>
         {/* nav links */}
         <nav className="flex space-x-16 font-semibold text-[#868686] text-lg justify-center items-center">
-          <Link href={""}>Explore Mentors</Link>
+          <Link href={"/mentors"}>Explore Mentors</Link>
           <Link href={""}>College/Uni</Link>
           <Link href={""}>Career Path</Link>
         </nav>
