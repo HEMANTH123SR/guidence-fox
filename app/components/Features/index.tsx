@@ -9,20 +9,20 @@ interface datatype {
 
 const Aboutdata: datatype[] = [
     {
-        imgSrc: "/assets/features/time.svg",
-        heading: "Cash collection",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa',
+        imgSrc: "/assets/download (2).png",
+        heading: "AR/VR Integration",
+        paragraph: 'Explore careers through immersive AR/VR simulations. Experience real-world job scenarios in a virtual environment. Gain valuable insights and make informed career choices with interactive simulations.',
     },
     {
         imgSrc: "/assets/features/signal.svg",
-        heading: "Insights",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa',
+        heading: "Personalized Learning",
+        paragraph: 'Enjoy a learning experience that adapts to your needs and pace. Our platform provides customized educational paths tailored to your goals. Focus on what matters most to you with personalized guidance and resources.',
 
     },
     {
-        imgSrc: "/assets/features/dollar.svg",
-        heading: "Payment",
-        paragraph: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa',
+        imgSrc: "/assets/features/time.svg",
+        heading: "One-to-One Mentorship",
+        paragraph: 'Receive personalized career counseling through one-to-one mentorship. Our experts provide tailored advice and support to help you navigate your career path. Benefit from dedicated guidance to achieve your professional goals.',
 
     }
 ]
@@ -32,7 +32,7 @@ const Features = () => {
         <div className="bg-babyblue" id="features">
             <div className="mx-auto max-w-2xl py-20 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h3 className="text-4xl sm:text-5xl font-semibold text-black text-center my-10">Amazing Features.</h3>
-                <h5 className="text-black opacity-60 text-lg font-normal text-center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque <br /> laudantium, totam rem aperiam, eaque ipsa quae ab.</h5>
+                <h5 className="text-black opacity-60 text-lg font-normal text-center">Explore your future with our AI assessments, immersive AR/VR simulations, expert mentorship, and interactive games. Our all-in-one platform makes career exploration engaging and personalized, helping you unlock your potential with fun and tailored guidance.</h5>
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-4 lg:gap-x-8 mt-10'>
                     {Aboutdata.map((item, i) => (
