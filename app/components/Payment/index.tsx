@@ -9,7 +9,7 @@ const Payment = () => {
                 <div className='grid grid-cols-1 lg:grid-cols-12 space-x-1'>
 
                     <div className='col-span-6 flex justify-center'>
-                        <Image src="/assets/13399753.jpg" alt="payment" width={600} height={600} />
+                        <Image src="/assets/Landscape mode-bro.svg" alt="payment" width={600} height={600} />
                     </div>
 
                     <div className='col-span-6 flex flex-col justify-center mb-32'>

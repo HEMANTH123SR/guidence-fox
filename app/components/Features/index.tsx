@@ -10,8 +10,8 @@ interface datatype {
 const Aboutdata: datatype[] = [
     {
         imgSrc: "/assets/download (2).png",
-        heading: "AR/VR Integration",
-        paragraph: 'Explore careers through immersive AR/VR simulations. Experience real-world job scenarios in a virtual environment. Gain valuable insights and make informed career choices with interactive simulations.',
+        heading: "Interactive Games",
+        paragraph: 'Engage in fun and interactive career-themed games designed to make learning about professions exciting. Test your skills, explore new interests, and stay motivated while gaining valuable career insights. Enjoy a playful approach to discovering your future!',
     },
     {
         imgSrc: "/assets/features/signal.svg",
