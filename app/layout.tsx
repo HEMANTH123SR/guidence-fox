@@ -1,19 +1,20 @@
-import type { Metadata } from 'next';
-import { dio_font_normale } from '@/lib/fonts/font';
-import { NavBar } from '@/app/components/NavBar';
-import './globals.css';
-import Zlayout from './components/Zlayout';
+import type { Metadata } from "next";
+import { dio_font_normale, euclid } from "@/lib/fonts/font";
+import { NavBar } from "@/app/components/UiComponents/NavBar";
+import "./globals.css";
+import Zlayout from "./components/Zlayout";
+import { FotterComponent } from "@/app/components/UiComponents/Fotter";
 import {
   ClerkProvider,
   SignInButton,
   SignedIn,
   SignedOut,
   UserButton,
-} from '@clerk/nextjs';
+} from "@clerk/nextjs";
 
 export const metadata: Metadata = {
-  title: 'guiding fox',
-  description: '',
+  title: "guiding fox",
+  description: "",
 };
 
 export default function RootLayout({
@@ -30,6 +31,7 @@ export default function RootLayout({
           <NavBar />
           {children}
           <Zlayout />
+          <FotterComponent />
         </body>
       </html>
     </ClerkProvider>
