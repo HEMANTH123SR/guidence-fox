@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { dio_font_normale, euclid } from "@/lib/fonts/font";
 import { NavBar } from "@/app/components/UiComponents/NavBar";
 import "./globals.css";
-import Zlayout from "./components/Zlayout";
 import { FotterComponent } from "@/app/components/UiComponents/Fotter";
 import {
   ClerkProvider,
@@ -30,7 +29,6 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
-          <Zlayout />
           <FotterComponent />
         </body>
       </html>
