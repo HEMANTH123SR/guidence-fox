@@ -34,7 +34,7 @@ export const NavBar = () => {
 
   return (
     <div
-      className={`sticky top-0 z-50   bg-white w-screen flex justify-center items-center ${
+      className={`sticky top-0 z-50  border-b  bg-[#FEFEFF] w-screen flex justify-center items-center ${
         isScrolled && "border-b"
       }`}
     >
@@ -54,7 +54,7 @@ export const NavBar = () => {
               get started
             </button>
           ) : (
-            <div className="flex justify-center items-center space-x-1 text-[#AFAEAE]">
+            <div className="flex  justify-center items-center space-x-1 tracking-wide text-[#AFAEAE]">
               <span className=" font-semibold capitalize ">{`SITE LANGUAGE : ENGLISH `}</span>
               <ChevronDown className="text-sm" />
             </div>

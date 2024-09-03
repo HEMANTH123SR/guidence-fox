@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dio_font_normale.className} w-screen overflow-x-hidden`}>
+      <body className={`${dio_font_normale.className} w-screen bg-[#FEFEFF] overflow-x-hidden`}>
         <NavBar />
         {children}
       </body>
