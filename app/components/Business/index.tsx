@@ -18,7 +18,7 @@ const Business = () => {
                 </div>
 
                 <div className='col-span-6 flex justify-center mt-10 lg:mt-0'>
-                    <Image src="/assets/business/business.png" alt="business" width={1000} height={805} />
+                    <Image src="/assets/3d-hygge-young-woman-working-at-the-table-wearing-vr-glasses.png" alt="business" width={500} height={300} />
                 </div>
 
             </div>
