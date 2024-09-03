@@ -30,7 +30,7 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
-          <Zlayout />
+         
           <FotterComponent />
         </body>
       </html>

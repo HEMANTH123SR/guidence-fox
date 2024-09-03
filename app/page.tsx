@@ -1,3 +1,4 @@
+import { Features } from "@/app/components/Features/index";
 import { SectionAccordion } from "@/app/components/UiComponents/SectionAccordion";
 export default function Home() {
   return (
@@ -51,6 +52,7 @@ export default function Home() {
           <SectionAccordion />
         </div>
       </div>
+      <Features />
     </main>
   );
 }
