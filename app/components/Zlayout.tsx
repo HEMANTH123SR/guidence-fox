@@ -9,7 +9,6 @@ export default function Zlayout() {
       <Features />
       <People />
       <Business />
-      <Payment />
     </main>
   );
 }

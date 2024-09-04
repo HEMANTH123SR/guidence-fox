@@ -1,6 +1,9 @@
 export const FotterComponent = () => {
   return (
-    <footer className="bg-[#59CC03] text-white">
+    <footer
+      className="bg-[#59CC03] text-white border-t-8 w-full border-[#E4E4E5]"
+    
+    >
       <div className="container mx-auto py-10">
         <div className="flex justify-between">
           <div>
@@ -121,3 +124,5 @@ export const FotterComponent = () => {
     </footer>
   );
 };
+
+//E4E4E5

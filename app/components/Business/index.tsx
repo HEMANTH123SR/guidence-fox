@@ -1,12 +1,14 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+
+import Link from "next/link";
 
 const Business = () => {
   return (
-    <div className="mx-auto max-w-7xl pt-20 sm:pb-24 px-6">
+    <div className="mx-auto max-w-7xl pt-20 sm:pb-24 px-6 ">
       <div className="grid grid-cols-1 lg:grid-cols-12 space-x-1">
-        <div className="col-span-6 flex flex-col justify-center">
-          <h2 className="text-midnightblue text-4xl sm:text-5xl font-semibold text-center lg:text-start lh-143">
+        <div className="col-span-6 flex space-y-4 flex-col justify-center">
+          <h2 className="text-midnightblue text-4xl text-[#4A4B4A] font-semibold text-center lg:text-start lh-143">
             AR/VR Integration: Immerse in Real-World Job Simulations
           </h2>
           <h3 className="text-black text-lg font-normal text-center lg:text-start lh-173 opacity-75 pt-3">
@@ -16,25 +18,18 @@ const Business = () => {
             insights. Enjoy a playful approach to discovering your future!
           </h3>
           <Link
-            href={'/'}
-            className="text-electricblue text-lg font-medium flex gap-2 pt-4 mx-auto lg:mx-0"
+            href={"/"}
+            className="text-electricblue text-lg flex gap-2 mx-auto lg:mx-0 pt-5 lg:pt-0 text-[#4FD119] font-semibold"
           >
-            Learn more{' '}
-            <Image
-              src="/assets/people/arrow-right.svg"
-              alt="arrow-right"
-              width={24}
-              height={24}
-            />
+            Learn more <ArrowRight className="text-3xl " />
           </Link>
         </div>
 
         <div className="col-span-6 flex justify-center mt-10 lg:mt-0">
-          <Image
-            src="/assets/3d-hygge-young-woman-working-at-the-table-wearing-vr-glasses.png"
-            alt="business"
-            width={500}
-            height={300}
+          <img
+            src="/ill/Technologies.png"
+            alt="doing something"
+            className="w-[30vw] h-auto"
           />
         </div>
       </div>

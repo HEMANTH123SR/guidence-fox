@@ -50,7 +50,7 @@ export const NavBar = () => {
         <Link href={"/"} className="flex flex-row  justify-center items-center">
           <img src={"/newlogo.png"} alt="foxy" className="h-10 w-auto" />
           <h1 className="font-extrabold   text-2xl  border-[#59CC03] text-[#59CC03] uppercase">
-            FOX
+            GREENFOX
           </h1>
           {/* <GiFoxTail className="h-10 w-10 text-[#59CC03] mt-4" /> */}
         </Link>
