@@ -1,18 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 
 export const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrolledToHeight, setIsScrolledToHeight] = useState(false);
-
-  const router = useRouter();
-
-  const handleLogin = () => {
-    router.push("/auth/login");
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +43,7 @@ export const NavBar = () => {
         <Link href={"/"} className="flex flex-row  justify-center items-center">
           <img src={"/newlogo.png"} alt="foxy" className="h-10 w-auto" />
           <h1 className="font-extrabold   text-2xl  border-[#59CC03] text-[#59CC03] uppercase">
-            GREENFOX
+            GUIDEFOX
           </h1>
           {/* <GiFoxTail className="h-10 w-10 text-[#59CC03] mt-4" /> */}
         </Link>
@@ -75,16 +68,18 @@ export const NavBar = () => {
           ) : (
             <div className="hidden md:flex">
               <SignedOut>
-                <button
-                  onClick={handleLogin}
+                <Link
+                  href={
+                    "https://informed-seahorse-16.accounts.dev/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2F"
+                  }
                   className="border-[#E4E4E5] border-2  bg-white text-[#59CC03] rounded-md px-6 py-2 font-bold capitalize"
                   style={{
                     boxShadow: "0 4px 0 0 #E4E4E5",
                     borderRadius: "6px",
                   }}
                 >
-                  Sign Up
-                </button>
+                  Sign In
+                </Link>
               </SignedOut>
               <SignedIn>
                 <UserButton />
@@ -113,3 +108,5 @@ function getRandomFoxyExpression(): string {
   const randomIndex = Math.floor(Math.random() * foxyExpression.length);
   return foxyExpression[randomIndex];
 }
+
+//https://informed-seahorse-16.accounts.dev/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2F
