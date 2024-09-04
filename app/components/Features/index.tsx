@@ -1,56 +1,93 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ArrowRight,
+  Feather,
+  GraduationCap,
+  Briefcase,
+  UserRound,
+} from "lucide-react";
 
-interface datatype {
+interface FeatureItem {
   imgSrc: string;
   heading: string;
   paragraph: string;
 }
 
-const Aboutdata: datatype[] = [
-    {
-        imgSrc: "/assets/download (2).png",
-        heading: "AR/VR Integration",
-        paragraph: 'Explore careers through immersive AR/VR simulations. Experience real-world job scenarios in a virtual environment. Gain valuable insights and make informed career choices with interactive simulations.',
-    },
-    {
-        imgSrc: "/assets/features/signal.svg",
-        heading: "Personalized Learning",
-        paragraph: 'Enjoy a learning experience that adapts to your needs and pace. Our platform provides customized educational paths tailored to your goals. Focus on what matters most to you with personalized guidance and resources.',
+const featureData: FeatureItem[] = [
+  {
+    imgSrc: "/assets/mentor.svg",
+    heading: "Find Mentor",
+    paragraph:
+      "AI-powered 1:1 mentorship program connecting students with industry professionals. Personalized guidance, real-world insights, and dedicated support through individual virtual sessions.",
+  },
+  {
+    imgSrc: "/assets/future-finder.svg",
+    heading: "Find Your Career",
+    paragraph:
+      "Immersive career discovery tool using AI and VR/AR. Assesses aptitudes, simulates work environments, and provides personalized career recommendations based on individual profiles and market trends.",
+  },
+  {
+    imgSrc: "/assets/uni-navigator.svg",
+    heading: "Find College and Uni",
+    paragraph:
+      "Comprehensive university search engine with AI-driven recommendations. Features virtual campus tours, program comparisons, and application tracking to help students find their ideal higher education fit.",
+  },
+];
 
-    },
-    {
-        imgSrc: "/assets/features/time.svg",
-        heading: "One-to-One Mentorship",
-        paragraph: 'Receive personalized career counseling through one-to-one mentorship. Our experts provide tailored advice and support to help you navigate your career path. Benefit from dedicated guidance to achieve your professional goals.',
+const FeatureCard: React.FC<FeatureItem> = ({ imgSrc, heading, paragraph }) => (
+  <div className="border border-gray-200 rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white">
+    <div className="p-3 inline-block mb-4 bg-blue-50 rounded-full">
+      <UserRound
+        className={`text-[#4FD119] text-2xl ${
+          imgSrc == "/assets/mentor.svg" ? "" : "hidden"
+        }`}
+      />
+      <Briefcase
+        className={`text-[#4FD119] text-2xl ${
+          imgSrc == "/assets/future-finder.svg" ? "" : "hidden"
+        }`}
+      />
+      <GraduationCap
+        className={`text-[#4FD119] text-2xl ${
+          imgSrc == "/assets/uni-navigator.svg" ? "" : "hidden"
+        }`}
+      />
+    </div>
+    <h3 className="text-2xl font-bold text-[#4A4B4A] mb-3">{heading}</h3>
+    <p className="text-gray-600 mb-6">{paragraph}</p>
+    <Link
+      href="/"
+      className="inline-flex items-center text-[#45D62F] font-semibold hover:text-[#4A4B4A] transition-colors duration-200"
+    >
+      Learn more <ArrowRight className="ml-2 w-5 h-5" />
+    </Link>
+  </div>
+);
 
-    }
-]
-
-const Features = () => {
-    return (
-        <div className="bg-babyblue" id="features">
-            <div className="mx-auto max-w-2xl py-20 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                <h3 className="text-4xl sm:text-5xl font-semibold text-black text-center my-10">Amazing Features.</h3>
-                <h5 className="text-black opacity-60 text-lg font-normal text-center">Explore your future with our AI assessments, immersive AR/VR simulations, expert mentorship, and interactive games. Our all-in-one platform makes career exploration engaging and personalized, helping you unlock your potential with fun and tailored guidance.</h5>
-
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-4 lg:gap-x-8 mt-10'>
-                    {Aboutdata.map((item, i) => (
-                        <div key={i} className='bg-white rounded-2xl p-5 featureShadow'>
-
-                            <Image src={item.imgSrc} alt={item.imgSrc} width={55} height={55} className="mb-2" />
-                            <h3 className="text-2xl font-semibold text-black mt-5">{item.heading}</h3>
-                            <h4 className='text-lg font-normal text-black opacity-50 my-2'>{item.paragraph}</h4>
-                            <Link href={'/'} className="text-electricblue text-xl font-medium flex gap-2 pt-10 pb-2">
-                                Learn more <Image src="/assets/people/arrow-right.svg" alt="arrow-right" width={24} height={24} />
-                            </Link>
-
-                        </div>
-                    ))}
-                </div>
-            </div>
+const Features: React.FC = () => {
+  return (
+    <section className="border rounded-xl py-20" id="features">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#4A4B4A] mb-4">
+            Amazing Features
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Explore your future with our AI assessments, immersive AR/VR
+            simulations, expert mentorship, and interactive tools. Unlock your
+            potential with personalized guidance and innovative technology.
+          </p>
         </div>
-    )
-}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-7">
+          {featureData.map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default Features;

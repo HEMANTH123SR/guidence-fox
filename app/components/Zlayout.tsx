@@ -1,16 +1,15 @@
-import People from './People';
-import Features from './Features';
-import Business from './Business';
-import Payment from './Payment';
-
+import People from "./People";
+import Features from "./Features";
+import Business from "./Business";
+import Payment from "./Payment";
 
 export default function Zlayout() {
   return (
     <main>
-      <People />
       <Features />
+      <People />
       <Business />
       <Payment />
     </main>
-  )
+  );
 }
