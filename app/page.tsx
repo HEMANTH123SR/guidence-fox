@@ -1,5 +1,5 @@
-import { Features } from "@/app/components/Features/index";
 import { SectionAccordion } from "@/app/components/UiComponents/SectionAccordion";
+import Zlayout from "./components/Zlayout";
 export default function Home() {
   return (
     <main className="flex  flex-col justify-center items-center">
@@ -52,7 +52,7 @@ export default function Home() {
           <SectionAccordion />
         </div>
       </div>
-      <Features />
+      <Zlayout />
     </main>
   );
 }

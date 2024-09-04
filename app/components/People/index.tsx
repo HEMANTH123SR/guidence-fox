@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 const People = () => {
   return (
@@ -25,10 +25,10 @@ const People = () => {
               designed just for you.
             </h3>
             <Link
-              href={"/"}
+              href={'/'}
               className="text-electricblue text-lg font-medium flex gap-2 mx-auto lg:mx-0 pt-5 lg:pt-0"
             >
-              Learn more{" "}
+              Learn more{' '}
               <Image
                 src="/assets/people/arrow-right.svg"
                 alt="arrow-right"

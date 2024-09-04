@@ -8,56 +8,49 @@ interface datatype {
 }
 
 const Aboutdata: datatype[] = [
-  {
-    imgSrc: "/assets/download (2).png",
-    heading: "Finding Mentor",
-    paragraph:
-      "Explore careers with AR/VR simulations. Experience real-world job scenarios virtually. Gain insights and make informed career choices through engaging and interactive simulations in a controlled environment.",
-  },
-  {
-    imgSrc: "/assets/features/signal.svg",
-    heading: "Personalized Learning",
-    paragraph:
-      "Enjoy a learning experience tailored to your pace. Our platform offers educational paths customized to your goals, focusing on what matters most with personalized guidance and resources to help you achieve success.",
-  },
-  {
-    imgSrc: "/assets/features/time.svg",
-    heading: "One-to-One Mentorship",
-    paragraph:
-      "Receive personalized career counseling through one-to-one mentorship. Our experts provide tailored advice and support, helping you navigate your career path with dedicated guidance to reach your professional goals.",
-  },
-];
+    {
+        imgSrc: "/assets/download (2).png",
+        heading: "AR/VR Integration",
+        paragraph: 'Explore careers through immersive AR/VR simulations. Experience real-world job scenarios in a virtual environment. Gain valuable insights and make informed career choices with interactive simulations.',
+    },
+    {
+        imgSrc: "/assets/features/signal.svg",
+        heading: "Personalized Learning",
+        paragraph: 'Enjoy a learning experience that adapts to your needs and pace. Our platform provides customized educational paths tailored to your goals. Focus on what matters most to you with personalized guidance and resources.',
 
-export const Features = () => {
-  return (
-    <div className="bg-babyblue" id="features">
-      <div className="mx-auto max-w-2xl py-20 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h3 className="text-4xl sm:text-5xl font-semibold text-[#4A4B4A] text-center my-10">
-          Amazing Features.
-        </h3>
+    },
+    {
+        imgSrc: "/assets/features/time.svg",
+        heading: "One-to-One Mentorship",
+        paragraph: 'Receive personalized career counseling through one-to-one mentorship. Our experts provide tailored advice and support to help you navigate your career path. Benefit from dedicated guidance to achieve your professional goals.',
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-4 lg:gap-x-8 mt-10">
-          {Aboutdata.map((item, i) => (
-            <div key={i} className="bg-white rounded-2xl p-5 featureShadow">
-              <Image
-                src={item.imgSrc}
-                alt={item.imgSrc}
-                width={55}
-                height={55}
-                className="mb-2"
-              />
-              <h3 className="text-xl font-semibold text-[#4A4B4A] mt-5">
-                {item.heading}
-              </h3>
-              <h4 className="text-lg font-normal text-[#4A4B4A] opacity-50 my-2">
-                {item.paragraph}
-              </h4>
+    }
+]
+
+const Features = () => {
+    return (
+        <div className="bg-babyblue" id="features">
+            <div className="mx-auto max-w-2xl py-20 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                <h3 className="text-4xl sm:text-5xl font-semibold text-black text-center my-10">Amazing Features.</h3>
+                <h5 className="text-black opacity-60 text-lg font-normal text-center">Explore your future with our AI assessments, immersive AR/VR simulations, expert mentorship, and interactive games. Our all-in-one platform makes career exploration engaging and personalized, helping you unlock your potential with fun and tailored guidance.</h5>
+
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-4 lg:gap-x-8 mt-10'>
+                    {Aboutdata.map((item, i) => (
+                        <div key={i} className='bg-white rounded-2xl p-5 featureShadow'>
+
+                            <Image src={item.imgSrc} alt={item.imgSrc} width={55} height={55} className="mb-2" />
+                            <h3 className="text-2xl font-semibold text-black mt-5">{item.heading}</h3>
+                            <h4 className='text-lg font-normal text-black opacity-50 my-2'>{item.paragraph}</h4>
+                            <Link href={'/'} className="text-electricblue text-xl font-medium flex gap-2 pt-10 pb-2">
+                                Learn more <Image src="/assets/people/arrow-right.svg" alt="arrow-right" width={24} height={24} />
+                            </Link>
+
+                        </div>
+                    ))}
+                </div>
             </div>
-          ))}
         </div>
-      </div>
-    </div>
-  );
-};
+    )
+}
 
 export default Features;
