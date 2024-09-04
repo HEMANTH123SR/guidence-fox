@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
-import { GiFoxTail } from "react-icons/gi";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
@@ -59,13 +57,19 @@ export const NavBar = () => {
         {/* nav links */}
         <nav className="flex space-x-16 font-semibold text-[#868686] text-lg justify-center items-center">
           <Link href={""}>Explore Mentors</Link>
-          <Link href={""}>College/Uni</Link>
+          <Link href={"/find-institution"}>College/Uni</Link>
           <Link href={""}>Career Path</Link>
         </nav>
         {/* lanquage and get started call to action btn */}
         <div className="flex justify-center items-center">
           {isScrolledToHeight ? (
-            <button className="bg-[#59CC03] uppercase rounded-xl px-4 py-2 font-bold text-white">
+            <button
+              className="border-[#E4E4E5] border-2  bg-[#59CC03] text-white rounded-md px-6 py-2 font-bold capitalize"
+              style={{
+                boxShadow: "0 4px 0 0 #E4E4E5",
+                borderRadius: "6px",
+              }}
+            >
               get started
             </button>
           ) : (

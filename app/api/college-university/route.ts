@@ -21,33 +21,31 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
+    // Connect to the database
     await connectDB();
+
+    // Parse the search parameters from the URL
     const { searchParams } = new URL(req.url);
 
+    console.log("Search Parameters:", searchParams);
+
+    // Build the filter and sort objects based on search parameters
     const filter = buildFilter(searchParams);
     const sort = buildSort(searchParams);
 
-    const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "10");
-    const skip = (page - 1) * limit;
+    // Query the database with the filter and sort
+    const institutions = await Institution.find(filter).sort(sort);
 
-    const institutions = await Institution.find(filter)
-      .sort(sort)
-      .skip(skip)
-      .limit(limit);
+    console.log("institutions", institutions);
 
-    const total = await Institution.countDocuments(filter);
-
+    // Return the successful response
     return NextResponse.json({
       success: true,
       data: institutions,
-      pagination: {
-        total,
-        page,
-        pages: Math.ceil(total / limit),
-      },
     });
   } catch (error: any) {
+    // Log the error and return an error response
+    console.error("Error in GET method:", error);
     return NextResponse.json(
       { success: false, message: error.message },
       { status: 500 }
@@ -58,50 +56,51 @@ export async function GET(req: NextRequest) {
 function buildFilter(searchParams: URLSearchParams) {
   const filter: any = {};
 
-  if (searchParams.has("location")) {
-    filter.location = searchParams.get("location");
-  }
-
-  if (searchParams.has("type")) {
-    filter.type = searchParams.get("type");
-  }
-
-  if (searchParams.has("affiliation")) {
-    filter.affiliation = searchParams.get("affiliation");
-  }
-
-  if (searchParams.has("minRanking") || searchParams.has("maxRanking")) {
-    filter.ranking = {};
-    if (searchParams.has("minRanking")) {
-      filter.ranking.$gte = parseInt(searchParams.get("minRanking") || "0");
+  // Add simple filters
+  const simpleFilters = ["location", "type", "affiliation", "specialization"];
+  simpleFilters.forEach((param) => {
+    if (searchParams.has(param)) {
+      filter[param] = searchParams.get(param);
     }
-    if (searchParams.has("maxRanking")) {
-      filter.ranking.$lte = parseInt(
-        searchParams.get("maxRanking") || "1000000"
-      );
-    }
-  }
+  });
 
-  if (searchParams.has("specialization")) {
-    filter.specialization = searchParams.get("specialization");
-  }
+  // Add ranking range filter
+  addRankingFilter(filter, searchParams);
 
-  if (searchParams.has("minRating")) {
-    filter["reviews.rating"] = {
-      $gte: parseFloat(searchParams.get("minRating") || "0"),
-    };
-  }
+  // Add minimum rating filter
+  addMinRatingFilter(filter, searchParams);
 
-  if (searchParams.has("facilities")) {
-    const facilities = searchParams.get("facilities")?.split(",");
-    if (facilities) {
-      facilities.forEach((facility) => {
-        filter[`facilities.${facility}`] = true;
-      });
-    }
-  }
+  // Add facilities filter
+  addFacilitiesFilter(filter, searchParams);
 
   return filter;
+}
+
+function addRankingFilter(filter: any, searchParams: URLSearchParams) {
+  const minRanking = searchParams.get("minRanking");
+  const maxRanking = searchParams.get("maxRanking");
+
+  if (minRanking || maxRanking) {
+    filter.ranking = {};
+    if (minRanking) filter.ranking.$gte = parseInt(minRanking);
+    if (maxRanking) filter.ranking.$lte = parseInt(maxRanking);
+  }
+}
+
+function addMinRatingFilter(filter: any, searchParams: URLSearchParams) {
+  const minRating = searchParams.get("minRating");
+  if (minRating) {
+    filter["reviews.rating"] = { $gte: parseFloat(minRating) };
+  }
+}
+
+function addFacilitiesFilter(filter: any, searchParams: URLSearchParams) {
+  const facilities = searchParams.get("facilities")?.split(",");
+  if (facilities) {
+    facilities.forEach((facility) => {
+      filter[`facilities.${facility}`] = true;
+    });
+  }
 }
 
 function buildSort(searchParams: URLSearchParams) {

@@ -6,7 +6,7 @@ type FilterCategory =
   | "Location"
   | "Total Fees"
   | "Rating"
-  | "Ownership"
+  | "Type"
   | "Specialization";
 
 type FilterCategories = {
@@ -16,8 +16,8 @@ type FilterCategories = {
 const filterCategories: FilterCategories = {
   Location: ["Bangalore", "Mumbai", "Delhi", "Chennai", "Kolkata"],
   "Total Fees": ["< ₹5 Lakh", "₹5-10 Lakh", "₹10-15 Lakh", "> ₹15 Lakh"],
-  Rating: ["5 Star", "4 Star", "3 Star", "2 Star", "1 Star"],
-  Ownership: ["Government", "Private", "Deemed"],
+  Rating: ["5", "4", "3", "2", "1"],
+  Type: ["Government", "Private", "Deemed"],
   Specialization: ["Engineering", "Management", "Medical", "Arts", "Science"],
 };
 
@@ -38,6 +38,8 @@ type Institution = {
     name: string;
     fees: number;
   }[];
+  type: string;
+  specialization: string;
 };
 
 const CollegeRankings: React.FC = () => {
@@ -47,27 +49,20 @@ const CollegeRankings: React.FC = () => {
   const [institutions, setInstitutions] = useState<Institution[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
 
   useEffect(() => {
     fetchInstitutions();
-  }, [selectedFilters, searchQuery, page]);
+  }, [selectedFilters, searchQuery]);
 
   const fetchInstitutions = async () => {
     setLoading(true);
     setError(null);
     try {
-      const queryParams = new URLSearchParams({
-        page: page.toString(),
-        limit: "10",
-        ...buildQueryParams(),
-      });
-      const response = await fetch(`/api/institutions?${queryParams}`);
+      const queryParams = new URLSearchParams(buildQueryParams());
+      const response = await fetch(`/api/college-university?${queryParams}`);
       const data = await response.json();
       if (data.success) {
         setInstitutions(data.data);
-        setTotalPages(data.pagination.pages);
       } else {
         setError("Failed to fetch institutions");
       }
@@ -82,8 +77,7 @@ const CollegeRankings: React.FC = () => {
     if (searchQuery) params.name = searchQuery;
     if (selectedFilters.Location)
       params.location = selectedFilters.Location.join(",");
-    if (selectedFilters.Ownership)
-      params.type = selectedFilters.Ownership.join(",");
+    if (selectedFilters.Type) params.type = selectedFilters.Type.join(",");
     if (selectedFilters.Specialization)
       params.specialization = selectedFilters.Specialization.join(",");
     if (selectedFilters.Rating) {
@@ -94,8 +88,8 @@ const CollegeRankings: React.FC = () => {
     }
     if (selectedFilters["Total Fees"]) {
       const [minFees, maxFees] = getFeesRange(selectedFilters["Total Fees"]);
-      if (minFees) params.minFees = minFees.toString();
-      if (maxFees) params.maxFees = maxFees.toString();
+      if (minFees !== null) params.minFees = minFees.toString();
+      if (maxFees !== null) params.maxFees = maxFees.toString();
     }
     return params;
   };
@@ -105,15 +99,15 @@ const CollegeRankings: React.FC = () => {
     let maxFees: number | null = null;
     fees.forEach((fee) => {
       if (fee === "< ₹5 Lakh") {
-        maxFees = maxFees ? Math.min(maxFees, 500000) : 500000;
+        maxFees = maxFees !== null ? Math.min(maxFees, 500000) : 500000;
       } else if (fee === "₹5-10 Lakh") {
-        minFees = minFees ? Math.min(minFees, 500000) : 500000;
-        maxFees = maxFees ? Math.max(maxFees, 1000000) : 1000000;
+        minFees = minFees !== null ? Math.min(minFees, 500000) : 500000;
+        maxFees = maxFees !== null ? Math.max(maxFees, 1000000) : 1000000;
       } else if (fee === "₹10-15 Lakh") {
-        minFees = minFees ? Math.min(minFees, 1000000) : 1000000;
-        maxFees = maxFees ? Math.max(maxFees, 1500000) : 1500000;
+        minFees = minFees !== null ? Math.min(minFees, 1000000) : 1000000;
+        maxFees = maxFees !== null ? Math.max(maxFees, 1500000) : 1500000;
       } else if (fee === "> ₹15 Lakh") {
-        minFees = minFees ? Math.max(minFees, 1500000) : 1500000;
+        minFees = minFees !== null ? Math.max(minFees, 1500000) : 1500000;
       }
     });
     return [minFees, maxFees];
@@ -124,7 +118,6 @@ const CollegeRankings: React.FC = () => {
       ...prev,
       [category]: [...(prev[category] || []), filter],
     }));
-    setPage(1);
   };
 
   const removeFilter = (category: FilterCategory, filter: string) => {
@@ -132,12 +125,10 @@ const CollegeRankings: React.FC = () => {
       ...prev,
       [category]: prev[category]?.filter((f) => f !== filter) || [],
     }));
-    setPage(1);
   };
 
   const clearAllFilters = () => {
     setSelectedFilters({});
-    setPage(1);
   };
 
   const toggleCategory = (category: FilterCategory) => {
@@ -267,7 +258,7 @@ const CollegeRankings: React.FC = () => {
               </div>
             </div>
 
-            {/* college cards */}
+            {/* College Cards */}
             {loading ? (
               <div>Loading...</div>
             ) : error ? (
@@ -315,6 +306,10 @@ const CollegeRankings: React.FC = () => {
                           Fees: ₹
                           {(institution.courses[0]?.fees / 100000).toFixed(2)}{" "}
                           Lakh
+                        </span>
+                        <span>Type: {institution.type}</span>
+                        <span>
+                          Specialization: {institution.specialization}
                         </span>
                       </div>
                       <div className="mt-4">
