@@ -20,19 +20,19 @@ const products: Product[] = [
   },
   {
     id: 2,
+    name: 'Product management & Blockchain developer',
+    href: '#',
+    imageSrc: '/mentors/assets/mentor/WhatsApp Image 2024-07-27 at 22.05.56_6ee4c9e7.jpg',
+    imageAlt: "Front of men's Basic Tee in black.",
+    color: 'Gowtham B S',
+  },
+  {
+    id: 2,
     name: 'Software Engineer (L3) @Twilio',
     href: '#',
     imageSrc: '/mentors/assets/mentor/urBuddy_aparna_singhal.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
     color: 'Aparna Singhal',
-  },
-  {
-    id: 3,
-    name: 'SDE @Flipkart ',
-    href: '#',
-    imageSrc: '/mentors/assets/mentor/urBuddy_upasana_singh.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    color: 'Upasana singh',
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ const products: Product[] = [
   },
   {
     id: 6,
-    name: 'UX Design',
+    name: 'Design Team Lead @WTM',
     href: '#',
     imageSrc: '/mentors/assets/mentor/1718229439906.jpeg',
     imageAlt: "Front of men's Basic Tee in black.",
